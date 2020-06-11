@@ -1,0 +1,16 @@
+/* high level declarations */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Helvetica, Arial,  sans-serif;
+    /* background-color: var(--gray); */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px
+}

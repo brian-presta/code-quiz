@@ -1,0 +1,1 @@
+var timerE1 = document.querySelector("#timer")
