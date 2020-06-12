@@ -3,7 +3,8 @@ var highScoreButtonE1 = pageContentE1.querySelector("#high-score");
 var timerE1 = pageContentE1.querySelector("#timer");
 var startButtonE1 = pageContentE1.querySelector("#start");
 var introE1 = pageContentE1.querySelector("#intro");
-var quizE1 = pageContentE1.querySelector("#quiz");
+var quizScreenE1 = pageContentE1.querySelector("#quiz");
+var quizButtonsHolder = quizScreenE1.querySelector(".quiz-button-wrapper");
 var doneScreenE1 = pageContentE1.querySelector("#done");
 var time = 50;
 var questionTracker = 0;
@@ -32,7 +33,7 @@ var clockStart = function(){
         if (time < 1) {
             timerE1.textContent = "Time: 0"
             clearInterval(timerCountdown)
-            quizE1.style = "display: none"
+            quizScreenE1.style = "display: none"
             doneScreenE1.style = null
             
         }
@@ -41,25 +42,53 @@ var clockStart = function(){
     }
     var timerCountdown = setInterval(countDownProcessor,1000)
 };
-var drawQuiz = function(){
+var quizButtonHandler = function(event) {
+    var button = event.target.closest(".button")
+    if (!button){
+        return
+    }
+    evalQuiz(button)
+}
+var evalQuiz = function(button) {
+    var feedback = pageContentE1.querySelector("#feedback")
+    if (feedback){
+        feedback.remove()
+    }
+    feedback = document.createElement("h3")
+    feedback.id = "feedback"
+    feedback.textContent = "Your last answer was "
+    if (button.getAttribute("data-correct") === 'true'){
+        feedback.textContent += "correct!"
+    }
+    else {
+        time -= 20
+        feedback.textContent += "incorrect!"
+    }
+    pageContentE1.querySelector(".feedback-holder").appendChild(feedback)
+
     if (questionTracker >= questionHolder.length) {
         time = 0
         return
     }
-    var quizButtons = quizE1.querySelector(".quiz-button-wrapper").children
+    drawQuiz()
+}
+var drawQuiz = function(){
+    var quizButtons = quizButtonsHolder.children
     var currentQuestion = questionHolder[questionTracker]
-    quizE1.querySelector("h2").textContent = currentQuestion.question
+    quizScreenE1.querySelector("h2").textContent = currentQuestion.question
     for (x=0;x<4;x++){
         quizButtons[x].textContent = currentQuestion.answers[x].text 
         quizButtons[x].setAttribute("data-correct",currentQuestion.answers[x].correct)
-        console.log(quizButtons[x].getAttribute("data-correct"))
     }
+    questionTracker++
 }
-var startQuiz = function(){
+var startQuiz = function(event){
     introE1.style = "display: none"
-    quizE1.style = null
+    quizScreenE1.style = null
     clockStart()
     drawQuiz()
 };
 
 startButtonE1.addEventListener("click",startQuiz);
+quizButtonsHolder.addEventListener("click",quizButtonHandler)
+

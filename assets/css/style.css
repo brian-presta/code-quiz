@@ -73,3 +73,15 @@ h1 {
 .quiz button {
     margin:5px 0 ;
 }
+.feedback-holder {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    width: 80%;
+}
+#feedback {
+    color: rgba(24, 26, 25, 0.603);
+    border-top: solid 3px;
+    padding-top: 5px;
+    padding-right: 20px;
+}
