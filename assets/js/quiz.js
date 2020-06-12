@@ -10,6 +10,7 @@ var startButtonE1 = pageContentE1.querySelector("#start");
 var initialsFormE1 = doneScreenE1.querySelector("form")
 var quizButtonsHolder = quizScreenE1.querySelector(".quiz-button-wrapper");
 var time = 50;
+var score = 0;
 var questionTracker = 0;
 var questionHolder = [
     {
@@ -73,7 +74,7 @@ var evalQuiz = function(button) {
     }
     else {
         // if wrong, docks them time
-        time -= 20
+        time -= 10
         feedback.textContent += "incorrect!"
     }
     // puts feedback on page
@@ -103,7 +104,7 @@ var startQuiz = function(event){
     drawQuiz()
 };
 var endQuiz = function(){
-    var score = time
+    score = time
     time = -200
     quizScreenE1.style = "display: none"
     doneScreenE1.style = null
@@ -111,6 +112,20 @@ var endQuiz = function(){
     doneScreenE1.querySelector("p").textContent += (score + ".")
 };
 var submitScore = function(){
+    var userInitials = doneScreenE1.querySelector("input").value
+    if (!userInitials){
+        return
+    }
+    var currentScore = {initials:userInitials,score:score}
+    var highScores = JSON.parse(localStorage.getItem("scores"))
+    if (highScores) {
+        highScores.push(currentScore)
+        highScores.sort(function(a,b){return b.score - a.score})
+    }
+    else {
+        highScores = [currentScore]
+    }
+    localStorage.setItem("scores",JSON.stringify(highScores))
     toHighScore()
 }
 var toHighScore = function(){
@@ -124,7 +139,20 @@ var toHighScore = function(){
     drawHighScores()
 };
 var drawHighScores = function(){
-
+    var highScores = JSON.parse(localStorage.getItem("scores"))
+    var scoreList = highScoreScreenE1.querySelector(".high-score-list")
+    if (!highScores) {
+        var placeHolder = document.createElement("li")
+        placeHolder.textContent = "No scores yet!"
+        scoreList.appendChild(placeHolder)
+    }
+    else {
+        for (x=0;x<highScores.length;x++){
+            var placeHolder = document.createElement("li")
+            placeHolder.textContent = `${x+1}. ${highScores[x].initials} - ${highScores[x].score}`
+            scoreList.appendChild(placeHolder)
+        }
+    }
 };
 var backButtonHandler = function(){
     location.reload()
