@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <a href="#" id="high-score">High Scores</a>
+        <a href="#" id="high-score-link">High Scores</a>
         <p id='timer'>Time: 0</p>
     </header>
     <main>
@@ -29,8 +29,28 @@
                 <button class="button">4. Fourth answer would go here!</button>
             </div>
         </section>
-        <section class="done-screen" style="display: none;" id="done"> 
+        <section class="done-screen" style="display: none;"> 
             <h2>All done!</h2>
+            <p>Your final score is </p>
+            <div class="initials-submit-wrapper">
+                <span>Enter initials:</span>
+                <form>
+                    <input type="text" class="text-input" placeholder="Initials">
+                    <button class="button">Submit</button>
+                </form>
+            </div>
+        </section>
+        <section class="high-score-screen" style="display: none;">
+            <h2>High Scores</h2>
+            <ul class="high-score-list">
+                <li>1. Placeholder</li>
+                <li>2. Placeholder</li>
+                <li>3. Placeholder</li>
+            </ul>
+            <div class="score-buttons-holder">
+                <button class="button" id="back">Go Back</button>
+                <button class="button" id="clear-score">Clear High Scores</button>
+            </div>
         </section>
     </main>
     <div class="feedback-holder"></div>

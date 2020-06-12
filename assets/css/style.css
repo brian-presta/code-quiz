@@ -85,3 +85,26 @@ h1 {
     padding-top: 5px;
     padding-right: 20px;
 }
+/* done screen styling */
+.done-screen {
+    font-size: 25px;
+}
+.initials-submit-wrapper{
+    display: flex;
+    margin: 5px 0;
+}
+.done-screen span {
+    margin-right: 10px;
+}
+.done-screen input {
+    outline: none;
+    padding: 8px;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 12px;
+    text-align: right;
+}
+/* high score screen styling */
+.high-score-list {
+    list-style: none;
+}
