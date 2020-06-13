@@ -157,9 +157,18 @@ var drawHighScores = function(){
 var backButtonHandler = function(){
     location.reload()
 }
+var clearScores = function(){
+    localStorage.clear()
+    var oldList = highScoreScreenE1.querySelector("ul").children
+    for (x=0;x<oldList.length;x++){
+        oldList[x].remove()
+    }
+    drawHighScores()
+};
 startButtonE1.addEventListener("click",startQuiz);
 quizButtonsHolder.addEventListener("click",quizButtonHandler)
 highScoreLinkE1.addEventListener("click",toHighScore)
 initialsFormE1.addEventListener("submit",submitScore)
 backButtonE1.addEventListener("click",backButtonHandler)
+clearScoresButtonE1.addEventListener("click",clearScores)
 

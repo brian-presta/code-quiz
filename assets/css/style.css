@@ -107,4 +107,9 @@ h1 {
 /* high score screen styling */
 .high-score-list {
     list-style: none;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.score-buttons-holder {
+    margin-top: 10px;
 }
