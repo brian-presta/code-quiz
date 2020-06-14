@@ -156,7 +156,7 @@ var submitScore = function(){
     }
     localStorage.setItem("scores",JSON.stringify(highScores))
     toHighScore()
-}
+};
 var toHighScore = function(){
     time = -200
     pageContentE1.querySelector("#timer").textContent = "Time: 0"
