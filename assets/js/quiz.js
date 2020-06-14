@@ -1,3 +1,4 @@
+// global vars
 var pageContentE1 = document.querySelector("body");
 var introE1 = pageContentE1.querySelector("#intro");
 var quizScreenE1 = pageContentE1.querySelector("#quiz");
@@ -9,10 +10,19 @@ var clearScoresButtonE1 = highScoreScreenE1.querySelector("#clear-score")
 var startButtonE1 = pageContentE1.querySelector("#start");
 var initialsFormE1 = doneScreenE1.querySelector("form")
 var quizButtonsHolder = quizScreenE1.querySelector(".quiz-button-wrapper");
-var time = 50;
+var time = 60;
 var score = 0;
 var questionTracker = 0;
 var questionHolder = [
+    {
+        question: "How would you increase the value of a variable holding a number by 1?",
+        answers: [
+            {text:"1. variable = variable + 1", correct:false},
+            {text:"2. variable += 1", correct:false},
+            {text:"3. variable++", correct:false},
+            {text:"4. All of the above", correct:true}
+        ]
+    },
     {
         question: "Which of the following is not a data type in JavaScript?",
         answers: [
@@ -30,8 +40,27 @@ var questionHolder = [
             {text:"3. toArray(string)", correct:false},
             {text:"4. split(string)", correct:false}
         ]
+    },
+    {
+        question: "Which of the following values would be considered 'truthy' in JavaScript?",
+        answers: [
+            {text:"1. '' (empty string)", correct:false},
+            {text:"2. null", correct:false},
+            {text:"3. -1", correct:true},
+            {text:"4. false", correct:false}
+        ]
+    },
+    {
+        question: "If x = 4 and y = 9, how would 'if (x && y > 6)' be interpreted?",
+        answers: [
+            {text:"1. False", correct:false},
+            {text:"2. undefined", correct:false},
+            {text:"3. an error would occur", correct:false},
+            {text:"4. True", correct:true}
+        ]
     }
 ];
+// functions
 var clockStart = function(){    
     var timerE1 = pageContentE1.querySelector("#timer")
     var countDownProcessor = function(){
@@ -159,12 +188,13 @@ var backButtonHandler = function(){
 }
 var clearScores = function(){
     localStorage.clear()
-    var oldList = highScoreScreenE1.querySelector("ul").children
-    for (x=0;x<oldList.length;x++){
-        oldList[x].remove()
-    }
+    highScoreScreenE1.querySelector(".high-score-list").remove()
+    var newList = document.createElement("ul")
+    newList.className = 'high-score-list'
+    highScoreScreenE1.querySelector(".score-list-holder").appendChild(newList)
     drawHighScores()
 };
+// event listeners
 startButtonE1.addEventListener("click",startQuiz);
 quizButtonsHolder.addEventListener("click",quizButtonHandler)
 highScoreLinkE1.addEventListener("click",toHighScore)
